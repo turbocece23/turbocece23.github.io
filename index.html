@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Photography Portfolio</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+	  height: 100%;
+	  margin: 0;
+    }
+	
+	html {
+	  height: 100%;
+	  margin: 0;
+	}
+
+    header {
+      text-align: center;
+      padding: 60px 20px 30px;
+      background: #000;
+      color: white;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 3em;
+      letter-spacing: 2px;
+    }
+
+    header h2 {
+      margin: 10px 0 0;
+      font-weight: normal;
+      font-size: 1.5em;
+      color: #aaa;
+    }
+
+    .gallery {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 40px 20px;
+      flex-wrap: wrap;
+    }
+
+    .gallery img {
+      max-width: 100%;
+      height: auto;
+      width: 30%;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      object-fit: cover;
+    }
+
+	.page-wrapper {
+		display: flex;
+		flex-direction: column;
+		min-height: 100vh; /* Full height */
+	}
+
+    footer {
+		margin-top: auto; /* Pushes the footer down */
+	}
+
+    @media (max-width: 768px) {
+      .gallery img {
+        width: 90%;
+      }
+    }
+	
+	.fade-in {
+	  opacity: 0;
+	  transform: translateY(30px);
+	  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+	}
+
+	.fade-in.visible {
+	  opacity: 1;
+	  transform: translateY(0);
+	}
+  </style>
+</head>
+
+<body>
+  <div class="page-wrapper">
+    <header>
+      <h1>Cesare Brunello</h1>
+      <h2>experimental photography</h2>
+    </header>
+
+    <div class="gallery">
+      <img src="media/1.jpg" alt="Photo 1" class="fade-in">
+      <img src="media/2.jpg" alt="Photo 2" class="fade-in">
+      <img src="media/3.jpg" alt="Photo 3" class="fade-in">
+	  
+      <img src="media/4.jpg" alt="Photo 1" class="fade-in">
+      <img src="media/5.jpg" alt="Photo 2" class="fade-in">
+      <img src="media/6.jpg" alt="Photo 3" class="fade-in">
+    </div>
+
+    <footer>
+      <p></p>
+    </footer>
+  </div>
+  <script>
+	  const faders = document.querySelectorAll('.fade-in');
+
+	  const appearOptions = {
+		threshold: 0.3,
+		rootMargin: "0px 0px -20px 0px"
+	  };
+
+	  const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+		entries.forEach(entry => {
+		  if (!entry.isIntersecting) return;
+		  entry.target.classList.add('visible');
+		  observer.unobserve(entry.target);
+		});
+	  }, appearOptions);
+
+	  faders.forEach(fader => {
+		appearOnScroll.observe(fader);
+	  });
+	</script>
+</body>
+
+</html>
